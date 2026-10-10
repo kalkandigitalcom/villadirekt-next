@@ -425,7 +425,7 @@ export const en: Dictionary = {
     villaUnit: "villas",
     guestsLabel: "{n} guests",
     footerNote:
-      "Maki Dijital — visit our main archive to see every villa.",
+      "Kalkan Digital — visit our main archive to see every villa.",
     footerCta: "Explore all villas",
     staleNotice: "{n} villa(s) on this list are currently unavailable.",
   },

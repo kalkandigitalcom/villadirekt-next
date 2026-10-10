@@ -14,7 +14,7 @@ import { getCountryLabel } from "@/lib/country.helper";
    ===============================================================
    - Snapshot only (canlı kur/fiyat YOK)
    - Premium confirmation / concierge tonu
-   - Maki Dijital branding
+   - Kalkan Digital branding
    =============================================================== */
 
 export type ReservationApprovedProps = {
@@ -92,7 +92,7 @@ function detailCard(title: string, rows: string[]): string {
 export function renderReservationApprovedEmail(
   props: ReservationApprovedProps
 ): { subject: string; html: string } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
 
   const otherGuestsBlock =
     props.otherGuestNames && props.otherGuestNames.length

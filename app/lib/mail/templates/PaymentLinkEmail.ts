@@ -19,7 +19,7 @@ import {
      (canlı kur / canlı fiyat KULLANILMAZ)
    - CTA: "Ödeme Yap" → reservation.payment_link
    - Intro metni payment_preference'a göre değişir
-   - Maki Dijital branding
+   - Kalkan Digital branding
    =============================================================== */
 
 export type PaymentLinkEmailProps = {
@@ -67,7 +67,7 @@ function detailCard(title: string, rows: string[]): string {
 export function renderPaymentLinkEmail(
   props: PaymentLinkEmailProps
 ): { subject: string; html: string } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
 
   const introText = props.isFullPayment
     ? "Rezervasyonunuz için toplam ödeme talep edilmektedir."

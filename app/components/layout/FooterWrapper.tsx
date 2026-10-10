@@ -31,6 +31,13 @@ import { getVillaTypeNamesByLocale } from "@/lib/i18n/get-villa-type-translation
    okunur, seçim `Footer.tsx` (client) içinde yapılır. */
 import { getPageTitlesByLocale } from "@/lib/i18n/get-page-titles-by-locale.server";
 import type { TaxonomyNameByLocale } from "@/lib/i18n/taxonomy-name.helper";
+/* 🏷️ Geliştirici kredisi logosu — `/maki-admin/webmaster` "Admin Logo"
+   ile AYNI kaynak: sabit R2 path `site-assets/branding/admin-logo.webp`
+   (DB alanı YOK) + ETag versiyonu (admin layout ile aynı helper'lar).
+   Upload sonrası `invalidateSiteAssetVersions` tag'i tazeler → footer
+   yeni logoyu deploy'suz gösterir. */
+import { ADMIN_BRANDING_PATHS, getAdminLogoUrl } from "@/lib/admin-branding";
+import { getSiteAssetVersions } from "@/lib/storage/site-asset-version.server";
 
 /* ---------------- DYNAMIC TAXONOMY ITEMS ---------------- */
 
@@ -185,6 +192,11 @@ export default async function FooterWrapper() {
   const siteName = settings?.site_name || "Villa Kiralama";
   const phoneDigits = settings?.phone?.replace(/[^\d]/g, "") || "";
 
+  /* 🏷️ Admin Logo R2'de VARSA (ETag okunabildiyse) versiyonlu URL; yoksa
+     ya da R2'ye ulaşılamazsa null → Footer metin fallback'i gösterir
+     (kırık görsel yok). */
+  const developerLogoUrl = await resolveDeveloperLogoUrl();
+
   return (
     <Footer
       settings={settings}
@@ -194,6 +206,20 @@ export default async function FooterWrapper() {
       year={year}
       siteName={siteName}
       phoneDigits={phoneDigits}
+      developerLogoUrl={developerLogoUrl}
     />
   );
+}
+
+/** Admin Logo'nun (webmaster) versiyonlu public URL'i; dosya yoksa null. */
+async function resolveDeveloperLogoUrl(): Promise<string | null> {
+  try {
+    const path = ADMIN_BRANDING_PATHS["admin-logo"];
+    const versions = await getSiteAssetVersions([path]);
+    const version = versions[path];
+    if (!version) return null;
+    return getAdminLogoUrl(version) || null;
+  } catch {
+    return null;
+  }
 }

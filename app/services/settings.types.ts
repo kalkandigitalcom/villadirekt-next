@@ -64,7 +64,7 @@ export type Settings = {
   // 🔥 MAIL (Resend)
   resend_api_key?: string | null;
   mail_from?: string | null; // örn: rezervasyon@domain.com
-  mail_from_name?: string | null; // örn: MAKI DIGITAL
+  mail_from_name?: string | null; // örn: KALKAN DIGITAL
 
   /* 🔥 HOMEPAGE HERO — content yönetimi.
      Tümü nullable; eksik alan hardcoded default'a fallback eder

@@ -14,7 +14,7 @@ import { getCountryLabel } from "@/lib/country.helper";
    ===============================================================
    - Snapshot only (canlı kur/fiyat YOK)
    - Nazik, profesyonel, saygılı ton
-   - Maki Dijital branding
+   - Kalkan Digital branding
    =============================================================== */
 
 export type ReservationCancelledProps = {
@@ -92,7 +92,7 @@ function detailCard(title: string, rows: string[]): string {
 export function renderReservationCancelledEmail(
   props: ReservationCancelledProps
 ): { subject: string; html: string } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
 
   const otherGuestsBlock =
     props.otherGuestNames && props.otherGuestNames.length

@@ -254,7 +254,7 @@ export default function AdminLoginPage() {
           <div>
             <DesktopBrandMark />
             <p className="text-[10px] tracking-[0.32em] uppercase text-white/40 mt-7 font-semibold">
-              Maki Dijital · Admin · CRM
+              Kalkan Digital · Admin · CRM
             </p>
           </div>
 
@@ -277,7 +277,7 @@ export default function AdminLoginPage() {
 
           {/* Bottom: footer */}
           <div className="flex items-center justify-between text-[11px] text-white/30 tracking-wide font-medium">
-            <span>© {new Date().getFullYear()} Maki Dijital</span>
+            <span>© {new Date().getFullYear()} Kalkan Digital</span>
             <span className="font-mono uppercase">All rights reserved</span>
           </div>
         </div>
@@ -302,7 +302,7 @@ export default function AdminLoginPage() {
             <LoginBrandMark />
             <div className="text-center">
               <p className="text-[15px] font-bold text-[var(--color-stone-900)] leading-tight">
-                Maki Dijital
+                Kalkan Digital
               </p>
               <p className="text-[10px] tracking-[0.22em] uppercase text-[var(--color-stone-500)] mt-0.5">
                 Admin · CRM
@@ -377,7 +377,7 @@ export default function AdminLoginPage() {
                         }}
                         disabled={submitting}
                         className="input !h-12 !pl-11"
-                        placeholder="ornek@maki.com"
+                        placeholder="ornek@kalkandigital.com"
                       />
                     </div>
                   </div>
@@ -587,7 +587,7 @@ export default function AdminLoginPage() {
 
           {/* Mobile footer */}
           <p className="text-[11px] text-[var(--color-stone-400)] text-center mt-7 lg:hidden">
-            © {new Date().getFullYear()} Maki Dijital
+            © {new Date().getFullYear()} Kalkan Digital
           </p>
         </div>
       </main>
@@ -618,7 +618,7 @@ function LoginBrandMark() {
             "0 12px 32px -12px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(15, 23, 42, 0.08)",
         }}
       >
-        M
+        K
       </div>
     );
   }
@@ -669,7 +669,7 @@ function DesktopBrandMark() {
             "0 24px 48px -16px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(125, 211, 252, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
         }}
       >
-        M
+        K
       </div>
     );
   }

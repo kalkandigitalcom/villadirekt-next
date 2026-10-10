@@ -19,7 +19,7 @@ export function renderTestEmail(props: TestEmailProps): {
   subject: string;
   html: string;
 } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
   const sentAt = props.sentAt || new Date();
 
   const body =

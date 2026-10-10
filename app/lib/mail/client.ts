@@ -93,7 +93,7 @@ export async function getMailConfig(): Promise<{
 
   const dbName = (settings?.mail_from_name || "").trim();
   const envName = (process.env.RESEND_FROM_NAME || "").trim();
-  const fromName = envName || dbName || "Maki Dijital";
+  const fromName = envName || dbName || "Kalkan Digital";
   const fromNameSource: "db" | "env" | "default" = envName
     ? "env"
     : dbName
@@ -135,7 +135,7 @@ export async function getMailConfig(): Promise<{
 }
 
 /* ---------------------------------------------
-   "Maki Dijital <rez@domain>" formatı
+   "Kalkan Digital <rez@domain>" formatı
 ---------------------------------------------- */
 export function formatFrom(name: string, address: string): string {
   const cleanName = (name || "").replace(/[<>]/g, "").trim();

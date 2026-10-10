@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { useState } from "react";
 import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -211,7 +211,13 @@ type FooterProps = {
   year: number;
   siteName: string;
   phoneDigits: string;
+  /** 🏷️ Geliştirici kredisi logosu — webmaster "Admin Logo" (FooterWrapper
+   *  çözer). null/undefined ya da yüklenemezse metin fallback'i. */
+  developerLogoUrl?: string | null;
 };
+
+/** Geliştirici kredisi metin fallback'i (marka adı — çevrilmez). */
+const DEVELOPER_BRAND = "Kalkan Digital";
 
 export default function Footer({
   settings,
@@ -220,7 +226,11 @@ export default function Footer({
   year,
   siteName,
   phoneDigits,
+  developerLogoUrl = null,
 }: FooterProps) {
+  /* 🏷️ Logo URL'i 404/hata verirse metne düş. */
+  const [developerLogoFailed, setDeveloperLogoFailed] = useState(false);
+  const showDeveloperLogo = !!developerLogoUrl && !developerLogoFailed;
   /* 🛡️ PHASE 9B — locale, Header.tsx (Phase 9A) ile BİREBİR AYNI şekilde
      `usePathname()` + `localeFromPathname()` ile saf/senkron türetilir;
      middleware/headers() gerektirmez. TR path'lerinde `dictionary`
@@ -474,12 +484,13 @@ export default function Footer({
               ))}
             </nav>
 
-            {/* 🛡️ Maki Dijital — ajans imzası (logo asset, href AYNEN). */}
+            {/* 🏷️ Kalkan Digital — ajans imzası. Logo: webmaster "Admin
+                Logo" (yoksa / yüklenemezse marka adı metni). */}
             <a
-              href="https://makidijital.com"
+              href="https://kalkandigital.com"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${dictionary.footer.webDevelopment}: Maki Dijital`}
+              aria-label={`${dictionary.footer.webDevelopment}: ${DEVELOPER_BRAND}`}
               className="
                 group inline-flex items-center gap-1.5
                 text-white/45 hover:text-white
@@ -490,13 +501,27 @@ export default function Footer({
             >
               <span>{dictionary.footer.webDevelopment}</span>
               <span aria-hidden="true" className="text-white/25">:</span>
-              <Image
-                src="/brand/logos/Developer-Credit.png"
-                alt="Maki Dijital"
-                width={1254}
-                height={1254}
-                className="h-7 w-7 rounded-md object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200 motion-reduce:transition-none"
-              />
+              {showDeveloperLogo ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={developerLogoUrl as string}
+                  alt={DEVELOPER_BRAND}
+                  width={28}
+                  height={28}
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setDeveloperLogoFailed(true)}
+                  data-testid="developer-credit-logo"
+                  className="h-7 w-7 rounded-md object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200 motion-reduce:transition-none"
+                />
+              ) : (
+                <span
+                  data-testid="developer-credit-text"
+                  className="font-semibold text-white/70 group-hover:text-white transition-colors duration-200 motion-reduce:transition-none"
+                >
+                  {DEVELOPER_BRAND}
+                </span>
+              )}
             </a>
           </div>
         </div>

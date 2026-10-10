@@ -2,7 +2,7 @@
    🔥 EMAIL LAYOUT — shared HTML shell (inline-styled, client-safe)
    ===============================================================
    - Gmail / Outlook / Apple Mail uyumlu inline CSS
-   - Maki Dijital branding: cyan/blue/green gradient + slate dark
+   - Kalkan Digital branding: cyan/blue/green gradient + slate dark
    - "React Email" pattern: küçük helper fonksiyonlar component gibi
    =============================================================== */
 
@@ -26,7 +26,7 @@ export function escapeHtml(text: string): string {
 }
 
 export function emailLayout({
-  brandName = "Maki Dijital",
+  brandName = "Kalkan Digital",
   brandLogoUrl = null,
   preheader = "",
   body,

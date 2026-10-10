@@ -66,10 +66,11 @@ describe("buildTotpUri", () => {
     expect(uri).toContain(`secret=${secret}`);
   });
 
-  it("issuer verilmezse default 'Maki Admin' kullanılır", () => {
+  it("issuer verilmezse default 'Kalkan Digital' kullanılır (yeni kayıtlar)", () => {
     const secret = generateTotpSecret();
     const uri = buildTotpUri({ secret, accountEmail: "x@y.com" });
-    expect(uri).toContain(encodeURIComponent("Maki Admin"));
+    expect(uri).toContain(encodeURIComponent("Kalkan Digital"));
+    expect(uri).not.toContain(encodeURIComponent("Maki Admin"));
   });
 });
 

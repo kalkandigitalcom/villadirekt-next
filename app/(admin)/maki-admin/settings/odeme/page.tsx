@@ -242,7 +242,7 @@ export default function SettingsPaymentPage() {
                     account_holder: e.target.value,
                   })
                 }
-                placeholder="MAKİ DİJİTAL HİZ. LTD."
+                placeholder="ŞİRKET UNVANI LTD. ŞTİ."
                 className="input"
               />
             </FieldShell>

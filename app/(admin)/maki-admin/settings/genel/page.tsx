@@ -246,7 +246,7 @@ export default function SettingsGeneralPage() {
             label="Şirket yasal adı (legal name)"
             value={companyLegalName}
             onChange={setCompanyLegalName}
-            placeholder="MAKİ DİJİTAL HİZ. LTD. ŞTİ."
+            placeholder="ŞİRKET UNVANI LTD. ŞTİ."
             disabled={loading}
             hint="Organization structured data > legalName alanında ve faturalarda kullanılır."
           />

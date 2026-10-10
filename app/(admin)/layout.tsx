@@ -46,8 +46,8 @@ export const dynamic = "force-dynamic";
    🛡️ ADMIN METADATA — public root metadata'sını YALNIZ (admin)/** için
    ezer (Next.js metadata kalıtımı; deeper-wins).
      - title.absolute: root'un public title'ını + olası template'i yok
-       sayar → tüm admin sekmelerinde sabit "MAKİ Dijital — Yönetim Paneli".
-     - icons: MAKİ admin favicon (server-side; client useAdminFavicon hook'u
+       sayar → tüm admin sekmelerinde sabit "Kalkan Digital — Yönetim Paneli".
+     - icons: admin favicon (server-side; client useAdminFavicon hook'u
        zararsız kalır, flash kalkar).
      - robots: admin noindex/nofollow (hijyen; public SEO ETKİLENMEZ).
    PUBLIC ROUTE GROUP `(public)` root metadata'sını AYNEN kullanır —
@@ -71,7 +71,7 @@ async function getAdminBrandingVersions() {
 export async function generateMetadata(): Promise<Metadata> {
   const { icon } = await getAdminBrandingVersions();
   return {
-    title: { absolute: "MAKİ Dijital — Yönetim Paneli" },
+    title: { absolute: "Kalkan Digital — Yönetim Paneli" },
     icons: { icon: getAdminIconUrl(icon) },
     robots: { index: false, follow: false },
   };

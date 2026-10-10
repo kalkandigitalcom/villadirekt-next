@@ -108,7 +108,7 @@ export default function SettingsIntegrationsPage() {
               label="Gönderici adı"
               value={mailFromName}
               onChange={setMailFromName}
-              placeholder="MAKI DIGITAL"
+              placeholder="KALKAN DIGITAL"
               disabled={loading}
               hint="Müşterinin inbox'ında görünen ad."
             />

@@ -61,7 +61,7 @@ function detailCard(title: string, rows: string[]): string {
 export function renderPaymentConfirmedEmail(
   props: PaymentConfirmedEmailProps
 ): { subject: string; html: string } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
 
   const stayCard = detailCard("Rezervasyon", [
     props.reservationNo

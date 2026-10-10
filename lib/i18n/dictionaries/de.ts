@@ -426,7 +426,7 @@ export const de: Dictionary = {
     villaUnit: "Villen",
     guestsLabel: "{n} Gäste",
     footerNote:
-      "Maki Dijital — besuchen Sie unser Hauptarchiv, um alle Villen zu sehen.",
+      "Kalkan Digital — besuchen Sie unser Hauptarchiv, um alle Villen zu sehen.",
     footerCta: "Alle Villen entdecken",
     staleNotice: "{n} Villa(s) dieser Liste sind derzeit nicht verfügbar.",
   },

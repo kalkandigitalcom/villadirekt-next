@@ -14,7 +14,7 @@ import { getCountryLabel } from "@/lib/country.helper";
    ===============================================================
    - Snapshot mantığı: değerler rezervasyon kaydından gelir
      (canlı kur / canlı fiyat KULLANILMAZ)
-   - Maki Dijital branding
+   - Kalkan Digital branding
    - Premium concierge tonu
    =============================================================== */
 
@@ -94,7 +94,7 @@ function detailCard(title: string, rows: string[]): string {
 export function renderReservationRequestEmail(
   props: ReservationRequestProps
 ): { subject: string; html: string } {
-  const brand = props.brandName || "Maki Dijital";
+  const brand = props.brandName || "Kalkan Digital";
 
   const otherGuestsBlock =
     props.otherGuestNames && props.otherGuestNames.length

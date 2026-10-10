@@ -576,7 +576,7 @@ function AdminBrandMark() {
   /* 🛡️ R2 versiyonu (server layout'tan) → logo değişince URL değişir. */
   const { logo: logoVersion } = useAdminBrandingVersions();
   if (imgFailed) {
-    return <span className="admin-brand-mark">M</span>;
+    return <span className="admin-brand-mark">K</span>;
   }
   return (
     <span
@@ -965,7 +965,7 @@ function AdminShell({
           <Link href="/maki-admin" className="admin-brand">
             <AdminBrandMark />
             <span className="admin-brand-text">
-              <span className="admin-brand-name block">Maki Dijital</span>
+              <span className="admin-brand-name block">Kalkan Digital</span>
               <span className="admin-brand-sub block">Admin · CRM</span>
             </span>
           </Link>
