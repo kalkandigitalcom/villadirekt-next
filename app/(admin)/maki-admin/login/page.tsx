@@ -623,22 +623,17 @@ function LoginBrandMark() {
     );
   }
 
+  /* 🎨 Kutu/çerçeve YOK — logo doğrudan; yükseklik sabit, genişlik
+     orana göre (esnetme/kırpma yok). Mobil: 56px kutu → 72px logo. */
   return (
-    <div
-      className="w-14 h-14 rounded-2xl overflow-hidden bg-white flex items-center justify-center"
-      style={{
-        boxShadow:
-          "0 12px 32px -12px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.06)",
-      }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={getAdminLogoUrl(logoVersion)}
-        alt="Admin"
-        onError={() => setImgFailed(true)}
-        className="w-full h-full object-contain"
-      />
-    </div>
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={getAdminLogoUrl(logoVersion)}
+      alt="Admin"
+      onError={() => setImgFailed(true)}
+      data-testid="login-brand-logo-mobile"
+      className="block h-[72px] w-auto max-w-[240px] object-contain"
+    />
   );
 }
 
@@ -674,22 +669,17 @@ function DesktopBrandMark() {
     );
   }
 
+  /* 🎨 Beyaz yuvarlatılmış kutu, padding, ring ve gölge KALDIRILDI —
+     logo panel zemininde doğrudan görünür. 72px kutu → 96px yükseklik,
+     genişlik oranla (max 300px). Fallback "K" rozeti AYNEN. */
   return (
-    <div
-      className="w-[72px] h-[72px] rounded-2xl overflow-hidden flex items-center justify-center"
-      style={{
-        background: "rgba(255, 255, 255, 0.98)",
-        boxShadow:
-          "0 24px 48px -16px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(125, 211, 252, 0.18), 0 0 32px -4px rgba(125, 211, 252, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.6)",
-      }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={getAdminLogoUrl(logoVersion)}
-        alt="Admin"
-        onError={() => setImgFailed(true)}
-        className="w-full h-full object-contain"
-      />
-    </div>
+    /* eslint-disable-next-line @next/next/no-img-element */
+    <img
+      src={getAdminLogoUrl(logoVersion)}
+      alt="Admin"
+      onError={() => setImgFailed(true)}
+      data-testid="login-brand-logo-desktop"
+      className="block h-[96px] w-auto max-w-[300px] object-contain"
+    />
   );
 }

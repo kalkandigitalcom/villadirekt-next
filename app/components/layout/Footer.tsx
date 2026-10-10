@@ -506,13 +506,12 @@ export default function Footer({
                 <img
                   src={developerLogoUrl as string}
                   alt={DEVELOPER_BRAND}
-                  width={28}
-                  height={28}
+                  height={36}
                   loading="lazy"
                   decoding="async"
                   onError={() => setDeveloperLogoFailed(true)}
                   data-testid="developer-credit-logo"
-                  className="h-7 w-7 rounded-md object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200 motion-reduce:transition-none"
+                  className="h-9 w-auto max-w-[150px] object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200 motion-reduce:transition-none"
                 />
               ) : (
                 <span

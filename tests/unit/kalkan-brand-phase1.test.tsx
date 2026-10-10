@@ -105,7 +105,9 @@ describe("footer geliştirici kredisi", () => {
     const img = screen.getByTestId("developer-credit-logo");
     expect(img.getAttribute("src")).toBe(LOGO);
     expect(img.getAttribute("alt")).toBe(BRAND);
-    expect(img.className).toContain("h-7 w-7");
+    /* 🎨 Footer logosu büyütüldü: 36px yükseklik, oran korunur. */
+    expect(img.className).toContain("h-9 w-auto");
+    expect(img.className).toContain("object-contain");
     expect(screen.queryByTestId("developer-credit-text")).toBeNull();
     expect(document.body.innerHTML).not.toMatch(/Developer-Credit|makidijital/);
   });
@@ -258,5 +260,44 @@ describe("teknik tanımlayıcılar DEĞİŞMEDİ", () => {
     expect(code("middleware.ts")).toContain('const LOGIN_PATH = "/maki-admin/login";');
     expect(code("hooks/use-favorites.ts")).toContain('const STORAGE_KEY = "maki_favorites";');
     expect(code("lib/auth/admin-permission-map.ts")).toContain('"/maki-admin/maki-finans"');
+  });
+});
+
+/* ---------------- 7) Admin logo boyutları + Finans etiketi ---------------- */
+describe("admin logo tasarımı + KalkanDigital Finans", () => {
+  it("login: logo kutusuz (beyaz kare / gölge / ring yok), daha büyük, oran korunur", () => {
+    const c = code("app/(admin)/maki-admin/login/page.tsx");
+    const fn = (name: string) => {
+      const start = c.indexOf(`function ${name}`);
+      const next = c.indexOf("\nfunction ", start + 10);
+      return c.slice(start, next === -1 ? undefined : next);
+    };
+    for (const [name, h] of [["DesktopBrandMark", "h-[96px]"], ["LoginBrandMark", "h-[72px]"]] as const) {
+      const body = fn(name);
+      /* son return = görsel varyantı (ilk return "K" fallback'i) */
+      const imgBranch = body.slice(body.lastIndexOf("return ("));
+      expect(imgBranch).toContain(`${h} w-auto`);
+      expect(imgBranch).toContain("object-contain");
+      expect(imgBranch).not.toMatch(/<div|bg-white|rgba\(255, 255, 255, 0\.98\)|rounded-2xl|boxShadow/);
+    }
+    /* fallback "K" rozetleri korunur */
+    expect(c.match(/\n\s+K\n/g)?.length).toBe(2);
+  });
+
+  it("sidebar logosu 52px (yalnız görsel varyantı); CSS sınıfı ortak boyutu değişmedi", () => {
+    const c = code("app/(admin)/maki-admin/layout.tsx");
+    expect(c).toMatch(/width: 52,\s*height: 52,/);
+    expect(read("app/globals.css")).toMatch(/\.admin-brand-mark \{\s*width: 42px;\s*height: 42px;/);
+  });
+
+  it("Finans görünen adları değişti; route / izin anahtarı aynı", () => {
+    expect(code("app/(admin)/maki-admin/layout.tsx")).toContain('name: "KalkanDigital Finans"');
+    expect(code("app/(admin)/maki-admin/maki-finans/page.tsx")).toContain("KalkanDigital Finans");
+    expect(code("app/services/admin-user.service.ts")).toContain(
+      '{ key: "finance", label: "KalkanDigital Finans", group: "Finans" }'
+    );
+    expect(code("lib/auth/admin-permission-map.ts")).toContain('{ href: "/maki-admin/maki-finans", need: "finance" }');
+    for (const p of ["app/(admin)/maki-admin/layout.tsx", "app/(admin)/maki-admin/maki-finans/page.tsx", "app/services/admin-user.service.ts"])
+      expect(code(p), p).not.toContain("Maki Finans");
   });
 });
