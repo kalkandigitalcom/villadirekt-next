@@ -134,12 +134,29 @@ describe("footer geliştirici kredisi", () => {
     expect(el.props.developerLogoUrl).toBe("https://cdn.example.com/site-assets/branding/admin-logo.webp?ts=e1f2");
   });
 
-  it("FooterWrapper: logo yok / R2 hatası → null (metin fallback)", async () => {
+  it("FooterWrapper: versiyon okunamazsa / R2 hatası → admin sidebar gibi VERSİYONSUZ aynı Admin Logo URL'i", async () => {
     const { default: FooterWrapper } = await import("@/app/components/layout/FooterWrapper");
+    const plain = "https://cdn.example.com/site-assets/branding/admin-logo.webp";
+    expect(getAdminLogoUrl(undefined)).toBe(plain);
     getSiteAssetVersionsMock.mockResolvedValue({});
-    expect((await FooterWrapper()).props.developerLogoUrl).toBeNull();
+    expect((await FooterWrapper()).props.developerLogoUrl).toBe(plain);
     getSiteAssetVersionsMock.mockRejectedValue(new Error("r2 down"));
-    expect((await FooterWrapper()).props.developerLogoUrl).toBeNull();
+    expect((await FooterWrapper()).props.developerLogoUrl).toBe(plain);
+  });
+
+  it("kaynak kilidi: footer = webmaster Admin Logo (aynı sabit path + helper); Developer-Credit.png YOK", () => {
+    const wrapper = code("app/components/layout/FooterWrapper.tsx");
+    expect(wrapper).toContain('ADMIN_BRANDING_PATHS["admin-logo"]');
+    expect(wrapper).toContain("getAdminLogoUrl(version)");
+    /* webmaster bu anahtarla yükler → aynı sabit path'e yazar */
+    const webmaster = code("app/(admin)/maki-admin/webmaster/page.tsx");
+    expect(webmaster).toContain('fileKey="admin-logo"');
+    expect(code("lib/admin-branding.client.ts")).toContain("const path = ADMIN_BRANDING_PATHS[fileKey];");
+    /* admin sidebar da aynı helper'ı kullanır */
+    expect(code("app/(admin)/maki-admin/layout.tsx")).toContain("src={getAdminLogoUrl(logoVersion)}");
+    for (const f of ["app/components/layout/Footer.tsx", "app/components/layout/FooterWrapper.tsx"]) {
+      expect(read(f), f).not.toMatch(/Developer-Credit|brand\/logos/);
+    }
   });
 
   it("logo değişince URL değişir (ETag versiyonu → cache-bust)", () => {

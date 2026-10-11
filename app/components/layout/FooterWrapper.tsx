@@ -211,15 +211,20 @@ export default async function FooterWrapper() {
   );
 }
 
-/** Admin Logo'nun (webmaster) versiyonlu public URL'i; dosya yoksa null. */
+/** Webmaster "Admin Logo" public URL'i — admin sidebar/login ile BİREBİR
+ *  aynı çözümleme: sabit path `ADMIN_BRANDING_PATHS["admin-logo"]` →
+ *  `getAdminLogoUrl(version)`. Versiyon (R2 ETag, `?ts=`) okunabiliyorsa
+ *  eklenir; okunamazsa admin layout'taki gibi VERSİYONSUZ aynı URL
+ *  kullanılır (eskiden null dönüp metne düşüyordu → logo hiç görünmüyordu).
+ *  Yalnız CDN base tanımsızsa (URL üretilemezse) null. Dosya gerçekten
+ *  yoksa Footer `<img onError>` ile "Kalkan Digital" metnine düşer. */
 async function resolveDeveloperLogoUrl(): Promise<string | null> {
+  const path = ADMIN_BRANDING_PATHS["admin-logo"];
+  let version: string | undefined;
   try {
-    const path = ADMIN_BRANDING_PATHS["admin-logo"];
-    const versions = await getSiteAssetVersions([path]);
-    const version = versions[path];
-    if (!version) return null;
-    return getAdminLogoUrl(version) || null;
+    version = (await getSiteAssetVersions([path]))[path];
   } catch {
-    return null;
+    version = undefined;
   }
+  return getAdminLogoUrl(version) || null;
 }
